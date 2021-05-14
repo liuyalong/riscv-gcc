@@ -28,6 +28,7 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
+#ifdef __LIBGCC_HAS_HF_MODE__
 #include "soft-fp.h"
 #include "half.h"
 
@@ -49,3 +50,4 @@ __lehf2 (HFtype a, HFtype b)
 }
 
 strong_alias (__lehf2, __lthf2);
+#endif

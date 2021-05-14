@@ -1290,14 +1290,14 @@
   [(set_attr "move_type" "shift_shift,load")
    (set_attr "mode" "SI")])
 
-(define_insn "extendhfsf2"
-  [(set (match_operand:SF     0 "register_operand" "=f")
-	(float_extend:SF
-	    (match_operand:HF 1 "register_operand" " f")))]
-  "TARGET_FP16"
-  "fcvt.s.h\t%0,%1"
-  [(set_attr "type" "fcvt")
-   (set_attr "mode" "SF")])
+;;;;(define_insn "extendhfsf2"
+;;;;  [(set (match_operand:SF     0 "register_operand" "=f")
+;;;;	(float_extend:SF
+;;;;	    (match_operand:HF 1 "register_operand" " f")))]
+;;;;  "TARGET_FP16"
+;;;;  "fcvt.s.h\t%0,%1"
+;;;;  [(set_attr "type" "fcvt")
+;;;;   (set_attr "mode" "SF")])
 
 (define_insn "extendsfdf2"
   [(set (match_operand:DF     0 "register_operand" "=f")
@@ -1308,14 +1308,14 @@
   [(set_attr "type" "fcvt")
    (set_attr "mode" "DF")])
 
-(define_insn "extendhfdf2"
-  [(set (match_operand:DF     0 "register_operand" "=f")
-	(float_extend:DF
-	    (match_operand:HF 1 "register_operand" " f")))]
-  "TARGET_FP16 && TARGET_DOUBLE_FLOAT"
-  "fcvt.d.h\t%0,%1"
-  [(set_attr "type" "fcvt")
-   (set_attr "mode" "DF")])
+;;;;(define_insn "extendhfdf2"
+;;;;  [(set (match_operand:DF     0 "register_operand" "=f")
+;;;;	(float_extend:DF
+;;;;	    (match_operand:HF 1 "register_operand" " f")))]
+;;;;  "TARGET_FP16 && TARGET_DOUBLE_FLOAT"
+;;;;  "fcvt.d.h\t%0,%1"
+;;;;  [(set_attr "type" "fcvt")
+;;;;   (set_attr "mode" "DF")])
 
 ;;
 ;;  ....................

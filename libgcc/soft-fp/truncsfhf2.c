@@ -26,6 +26,7 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
+#ifdef __LIBGCC_HAS_HF_MODE__
 #include "soft-fp.h"
 #include "half.h"
 #include "single.h"
@@ -46,3 +47,4 @@ __truncsfhf2 (SFtype a)
 
   return r;
 }
+#endif

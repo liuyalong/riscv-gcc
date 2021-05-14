@@ -58,7 +58,7 @@
 
 /* The implementation of _FP_MUL_MEAT_H and _FP_DIV_MEAT_H should be
    chosen by the target machine.  */
-
+#ifdef __LIBGCC_HAS_HF_MODE__
 typedef float HFtype __attribute__ ((mode (HF)));
 
 union _FP_UNION_H
@@ -77,6 +77,7 @@ union _FP_UNION_H
 #endif
   } bits;
 };
+#endif
 
 #define FP_DECL_H(X)		_FP_DECL (1, X)
 #define FP_UNPACK_RAW_H(X, val)	_FP_UNPACK_RAW_1 (H, X, (val))
