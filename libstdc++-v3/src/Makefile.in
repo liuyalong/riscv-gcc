@@ -234,7 +234,11 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = c++98 c++11 c++17 filesystem
+####ifndef RISCV_NOT_COMPILE_CXX17
+####DIST_SUBDIRS = c++98 c++11 c++17 filesystem
+####else
+DIST_SUBDIRS = c++98 c++11 filesystem
+####endif
 ABI_TWEAKS_SRCDIR = @ABI_TWEAKS_SRCDIR@
 ACLOCAL = @ACLOCAL@
 ALLOCATOR_H = @ALLOCATOR_H@
@@ -463,7 +467,11 @@ WARN_CXXFLAGS = \
 AM_CPPFLAGS = $(GLIBCXX_INCLUDES) $(CPPFLAGS)
 @ENABLE_FILESYSTEM_TS_FALSE@filesystem_dir = 
 @ENABLE_FILESYSTEM_TS_TRUE@filesystem_dir = filesystem
-SUBDIRS = c++98 c++11 c++17 $(filesystem_dir)
+####ifndef RISCV_NOT_COMPILE_CXX17
+####SUBDIRS = c++98 c++11 c++17 $(filesystem_dir)
+####else
+SUBDIRS = c++98 c++11 $(filesystem_dir)
+####endif
 @VTV_CYGMIN_FALSE@toolexeclib_LTLIBRARIES = libstdc++.la
 
 # Cross compiler support.
@@ -504,14 +512,18 @@ libstdc___la_LIBADD = \
 	$(top_builddir)/libsupc++/libsupc++convenience.la \
 	$(top_builddir)/src/c++98/libc++98convenience.la \
 	$(top_builddir)/src/c++11/libc++11convenience.la \
-	$(top_builddir)/src/c++17/libc++17convenience.la
+####ifndef RISCV_NOT_COMPILE_CXX17
+####	$(top_builddir)/src/c++17/libc++17convenience.la
+####endif
 
 libstdc___la_DEPENDENCIES = \
 	${version_dep} \
 	$(top_builddir)/libsupc++/libsupc++convenience.la \
 	$(top_builddir)/src/c++98/libc++98convenience.la \
 	$(top_builddir)/src/c++11/libc++11convenience.la \
-	$(top_builddir)/src/c++17/libc++17convenience.la
+####ifndef RISCV_NOT_COMPILE_CXX17
+####	$(top_builddir)/src/c++17/libc++17convenience.la
+####endif
 
 libstdc___la_LDFLAGS = \
 	-version-info $(libtool_VERSION) ${version_arg} -lm
@@ -955,7 +967,9 @@ uninstall-am: uninstall-toolexeclibLTLIBRARIES
 
 vpath % $(top_srcdir)/src/c++98
 vpath % $(top_srcdir)/src/c++11
-vpath % $(top_srcdir)/src/c++17
+####ifndef RISCV_NOT_COMPILE_CXX17
+####vpath % $(top_srcdir)/src/c++17
+####endif
 @ENABLE_FILESYSTEM_TS_TRUE@vpath % $(top_srcdir)/src/filesystem
 
 # Use special rules for compatibility-ldbl.cc compilation, as we need to

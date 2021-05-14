@@ -29,7 +29,11 @@ filesystem_dir =
 endif
 
 ## Keep this list sync'd with acinclude.m4:GLIBCXX_CONFIGURE.
-SUBDIRS = c++98 c++11 c++17 $(filesystem_dir)
+###ifdef RISCV_NOT_COMPILE_CXX17
+SUBDIRS = c++98 c++11 $(filesystem_dir)
+###else
+###SUBDIRS = c++98 c++11 c++17 $(filesystem_dir)
+###endif
 
 # Cross compiler support.
 if VTV_CYGMIN
@@ -59,7 +63,9 @@ endif
 
 vpath % $(top_srcdir)/src/c++98
 vpath % $(top_srcdir)/src/c++11
-vpath % $(top_srcdir)/src/c++17
+###ifndef RISCV_NOT_COMPILE_CXX17
+###vpath % $(top_srcdir)/src/c++17
+###endif
 if ENABLE_FILESYSTEM_TS
 vpath % $(top_srcdir)/src/filesystem
 endif
@@ -95,14 +101,18 @@ libstdc___la_LIBADD = \
 	$(top_builddir)/libsupc++/libsupc++convenience.la \
 	$(top_builddir)/src/c++98/libc++98convenience.la \
 	$(top_builddir)/src/c++11/libc++11convenience.la \
-	$(top_builddir)/src/c++17/libc++17convenience.la
+###ifndef RISCV_NOT_COMPILE_CXX17
+###	$(top_builddir)/src/c++17/libc++17convenience.la
+###endif
 
 libstdc___la_DEPENDENCIES = \
 	${version_dep} \
 	$(top_builddir)/libsupc++/libsupc++convenience.la \
 	$(top_builddir)/src/c++98/libc++98convenience.la \
 	$(top_builddir)/src/c++11/libc++11convenience.la \
-	$(top_builddir)/src/c++17/libc++17convenience.la
+###ifndef RISCV_NOT_COMPILE_CXX17
+###	$(top_builddir)/src/c++17/libc++17convenience.la
+###endif
 
 libstdc___la_LDFLAGS = \
 	-version-info $(libtool_VERSION) ${version_arg} -lm
